@@ -3,6 +3,10 @@ import { addSlash, getFormattedDate } from './util'
 import pdfBase from '../certificate.pdf'
 import { generatePdf } from './pdf-util'
 
+// TODO Use it to parse form
+const currentUrl = new URL(document.URL)
+const searchParams = currentUrl.searchParams
+
 const conditions = {
   '#field-firstname': {
     length: 1,
@@ -62,6 +66,27 @@ export function getProfile (formInputs) {
   const fields = {}
   for (const field of formInputs) {
     let value = field.value
+    if (field.id === 'field-firstname') {
+      value = searchParams.get('firstname')
+    }
+    if (field.id === 'field-lastname') {
+      value = searchParams.get('lastname')
+    }
+    if (field.id === 'field-birthday') {
+      value = searchParams.get('birthday')
+    }
+    if (field.id === 'field-placeofbirth') {
+      value = searchParams.get('placeofbirth')
+    }
+    if (field.id === 'field-address') {
+      value = searchParams.get('address')
+    }
+    if (field.id === 'field-city') {
+      value = searchParams.get('city')
+    }
+    if (field.id === 'field-zipcode') {
+      value = searchParams.get('zipcode')
+    }
     if (field.id === 'field-datesortie') {
       const dateSortie = field.value.split('-')
       value = `${dateSortie[2]}/${dateSortie[1]}/${dateSortie[0]}`
