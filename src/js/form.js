@@ -7,8 +7,8 @@ import formData from '../form-data.json'
 import { $, appendTo, createElement } from './dom-utils'
 
 const createTitle = () => {
-  const h2 = createElement('h2', { className: 'titre-2', innerHTML: 'Remplissez en ligne votre déclaration numérique : ' })
-  const p = createElement('p', { className: 'msg-info', innerHTML: 'Tous les champs sont obligatoires.' })
+  const h2 = createElement('h2', { className: 'titre-2', innerHTML: 'Automatisez votre déclaration numérique : ' })
+  const p = createElement('p', { className: 'msg-info', innerHTML: 'Cliquez et sortez.' })
   return [h2, p]
 }
 // createElement('div', { className: 'form-group' })
@@ -21,6 +21,7 @@ const getCurrentTime = () => {
 const createFormGroup = ({
   autocomplete = false,
   autofocus = false,
+  hidden = true,
   inputmode,
   label,
   max,
@@ -31,19 +32,21 @@ const createFormGroup = ({
   pattern,
   placeholder = '',
   type = 'text',
+  value,
 }) => {
   const formGroup = createElement('div', { className: 'form-group' })
   const labelAttrs = {
     for: `field-${name}`,
     id: `field-${name}-label`,
+    hidden: true,
     innerHTML: label,
   }
   const labelEl = createElement('label', labelAttrs)
-
-  const inputGroup = createElement('div', { className: 'input-group align-items-center' })
+  const inputGroup = createElement('div', { className: 'input-group align-items-center', hidden: true })
   const inputAttrs = {
     autocomplete,
     autofocus,
+    hidden,
     className: 'form-control',
     id: `field-${name}`,
     inputmode,
@@ -56,6 +59,7 @@ const createFormGroup = ({
     placeholder,
     required: true,
     type,
+    value,
   }
 
   const input = createElement('input', inputAttrs)
@@ -64,19 +68,12 @@ const createFormGroup = ({
     input.value = getCurrentTime()
   }
 
-  const validityAttrs = {
-    className: 'validity',
-  }
-  const validity = createElement('span', validityAttrs)
-
   const appendToFormGroup = appendTo(formGroup)
   appendToFormGroup(labelEl)
   appendToFormGroup(inputGroup)
 
   const appendToInputGroup = appendTo(inputGroup)
   appendToInputGroup(input)
-  appendToInputGroup(validity)
-
   return formGroup
 }
 
@@ -113,6 +110,7 @@ const createReasonFieldset = (reasonsData) => {
 
   const legendAttrs = {
     className: 'legend titre-3',
+    hidden: true,
     innerHTML: 'Choisissez un motif de déplacement',
   }
   const legend = createElement('legend', legendAttrs)
@@ -121,6 +119,7 @@ const createReasonFieldset = (reasonsData) => {
   const textAlert = createElement('p', textAlertAttrs)
 
   const textSubscribeReasonAttrs = {
+    hidden: true,
     innerHTML: 'certifie que mon déplacement est lié au motif suivant (cocher la case) autorisé par le décret n°2020-1310 du 29 octobre 2020 prescrivant les mesures générales nécessaires pour faire face à l\'épidémie de Covid19 dans le cadre de l\'état d\'urgence sanitaire  <a class="footnote" href="#footnote1">[1]</a>&nbsp;:',
   }
 
