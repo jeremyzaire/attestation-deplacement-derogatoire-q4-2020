@@ -6,10 +6,18 @@ import formData from '../form-data.json'
 
 import { $, appendTo, createElement } from './dom-utils'
 
+// TODO Use it to parse form
+const currentUrl = new URL(document.URL)
+const searchParams = currentUrl.searchParams
+const firstname = searchParams.get('firstname')
+const lastname = searchParams.get('lastname')
+
 const createTitle = () => {
-  const h2 = createElement('h2', { className: 'titre-2', innerHTML: 'Automatisez votre déclaration numérique : ' })
+  const h1 = createElement('h1', { className: 'titre-1', innerHTML: 'Lien personnel permanent de '})
+  const h1Name = createElement('h1', { className: 'titre-1-name', innerHTML: firstname + ' ' + lastname })
+  const h2 = createElement('h2', { className: 'titre-2', innerHTML: 'Votre déclaration numérique automatique : ' })
   const p = createElement('p', { className: 'msg-info', innerHTML: 'Cliquez et sortez.' })
-  return [h2, p]
+  return [h1, h1Name, h2, p]
 }
 // createElement('div', { className: 'form-group' })
 
