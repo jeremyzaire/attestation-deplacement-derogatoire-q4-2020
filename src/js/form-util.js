@@ -57,6 +57,28 @@ function validateAriaFields () {
     .includes(true)
 }
 
+function validateGenerationLinkFields () {
+  return Object.keys(conditions)
+    .filter(field => field !== '#field-datesortie')
+    .filter(field => field !== '#field-heuresortie')
+    .map((field) => {
+      const fieldData = conditions[field]
+      const pattern = fieldData.pattern
+      const length = fieldData.length
+      const isInvalidPattern = pattern && !$(field).value.match(pattern)
+      const isInvalidLength = length && !$(field).value.length
+
+      const isInvalid = !!(isInvalidPattern || isInvalidLength)
+
+      $(field).setAttribute('aria-invalid', isInvalid)
+      if (isInvalid) {
+        $(field).focus()
+      }
+      return isInvalid
+    })
+    .includes(true)
+}
+
 export function setReleaseDateTime (releaseDateInput) {
   const loadedDate = new Date()
   releaseDateInput.value = getFormattedDate(loadedDate)
@@ -174,6 +196,49 @@ export function prepareInputs (formInputs, reasonInputs, reasonFieldset, reasonA
   })
 }
 
+export function prepareGenerationLinkInputs (formInputs, snackbar) {
+  formInputs.forEach((input) => {
+    const exempleElt = input.parentNode.parentNode.querySelector('.exemple')
+    const validitySpan = input.parentNode.parentNode.querySelector('.validity')
+    if (input.placeholder && exempleElt) {
+      input.addEventListener('input', (event) => {
+        if (input.value) {
+          exempleElt.innerHTML = 'ex.&nbsp;: ' + input.placeholder
+          validitySpan.removeAttribute('hidden')
+        } else {
+          exempleElt.innerHTML = ''
+        }
+      })
+    }
+  })
+
+  $('#field-birthday').addEventListener('keyup', function (event) {
+    event.preventDefault()
+    const input = event.target
+    const key = event.keyCode || event.charCode
+    if (key !== 8 && key !== 46) {
+      input.value = addSlash(input.value)
+    }
+  })
+
+  $('#generate-link-btn').addEventListener('click', async (event) => {
+    // event.preventDefault()
+
+    const invalid = validateGenerationLinkFields()
+    if (invalid) {
+      return
+    }
+
+    snackbar.classList.remove('d-none')
+    setTimeout(() => snackbar.classList.add('show'), 100)
+
+    setTimeout(function () {
+      snackbar.classList.remove('show')
+      setTimeout(() => snackbar.classList.add('d-none'), 500)
+    }, 6000)
+  })
+}
+
 export function prepareForm () {
   const formInputs = $$('#form-profile input')
   const snackbar = $('#snackbar')
@@ -183,4 +248,10 @@ export function prepareForm () {
   const releaseDateInput = $('#field-datesortie')
   setReleaseDateTime(releaseDateInput)
   prepareInputs(formInputs, reasonInputs, reasonFieldset, reasonAlert, snackbar)
+}
+
+export function prepareGenerationLinkForm () {
+  const formGenerationLinkInputs = $$('#form-generation-link input')
+  const snackbar = $('#snackbar')
+  prepareGenerationLinkInputs(formGenerationLinkInputs, snackbar)
 }
