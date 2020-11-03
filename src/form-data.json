@@ -124,12 +124,24 @@
           "label": "Famille"
         },
         {
+          "code": "handicap",
+          "label": "Handicap"
+        },
+        {
           "code": "sport_animaux",
           "label": "Déplacements brefs"
         },
         {
           "code": "enfants",
           "label": "Enfants"
+        },
+        {
+          "code": "convocation",
+          "label": "Convocation judiciaire ou administrative"
+        },
+        {
+          "code": "missions",
+          "label": "Missions"
         }
       ]
     }
