@@ -562,7 +562,13 @@ input[type=number] {
 }
 
 @media (prefers-color-scheme: dark) {
-  .titre-2 .titre-1{
+  .titre-2 {
+    color: #A3A3FF;
+  }
+}
+
+@media (prefers-color-scheme: dark) {
+  .titre-1 {
     color: #A3A3FF;
   }
 }
