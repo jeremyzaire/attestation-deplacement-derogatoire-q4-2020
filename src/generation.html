@@ -6,19 +6,6 @@
     <meta name="msapplication-TileColor" content="#603cba">
     <meta name="msapplication-config" content="./favicons/browserconfig.xml">
     <meta name="theme-color" content="#ffffff">
-    <meta name="title" content="Générateur d'attestation de déplacement dérogatoire - COVID-19">
-    <meta name="description" content="Ce service officiel génère une version numérique de la déclaration de déplacement covid-19 à présenter aux forces de sécurité lors d’un contrôle.">
-    <meta name="keywords" content="covid19, covid-19, attestation, déclaration, déplacement, officielle, gouvernement">
-    <meta name="robots" content="index, follow">
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-    <meta name="language" content="French">
-    <meta property="og:title" content="Générateur d'attestation de déplacement dérogatoire  - COVID-19" />
-    <meta property="og:locale" content="fr_FR" />
-    <meta property="og:description" content="Ce service officiel génère une version numérique de la déclaration de déplacement covid-19 à présenter aux forces de sécurité lors d’un contrôle." />
-    <link rel="canonical" href="https://media.interieur.gouv.fr{{ PUBLIC_URL || '/deplacement-covid-19' }}" />
-    <meta property="og:url" content="https://media.interieur.gouv.fr{{ PUBLIC_URL || '/deplacement-covid-19' }}" />
-    <meta property="og:site_name" content="Générateur d'attestation de déplacement dérogatoire  - COVID-19" />
-    <script type='application/ld+json'>{"@context":"http://www.schema.org","@type":"GovernmentOrganization","name":"Générateur d'attestation de déplacement dérogatoire  - COVID-19","description":"Ce service officiel génère une version numérique de la déclaration de déplacement covid-19 à présenter aux forces de sécurité lors d’un contrôle.","address":{"@type":"PostalAddress","addressCountry":"France"}}</script>
 
     <link rel="apple-touch-icon" sizes="180x180" href="./favicons/apple-touch-icon.png">
     <link rel="icon" type="image/png" sizes="32x32" href="./favicons/favicon-32x32.png">
@@ -28,11 +15,12 @@
 
     <title>Attestation de déplacement dérogatoire</title>
 </head>
-<body>
+
+<body class="generation">
     <header role="banner" class="wrapper">
         <picture>
             <source srcset="/MIN_Interieur_RVB_dark_JZ.png" media="(prefers-color-scheme: dark)">
-            <img src="/MIN_Interieur_RVB_JZ.png" alt="Ministère de l'intérieur. Liberté, égalité, fraternité."
+            <img src="/MIN_Interieur_RVB_dark_JZ.png" alt="Ministère de l'intérieur. Liberté, égalité, fraternité."
                 class="logo" role="presentation" aria-hidden="true">
         </picture>
 
@@ -49,25 +37,15 @@
         </div>
     </header>
     <main role="main">
-        <p
-            class="alert  alert-danger  d-none"
-            role="alert"
-            id="alert-facebook"
-        ></p>
-
         <div class="wrapper">
-            <form id="form-profile" accept-charset="UTF-8"></form>
-            <p class="text-center mt-5">
-                <button type="button" id="generate-btn" class="btn btn-primary btn-attestation"><span ><i class="fa fa-file-pdf inline-block mr-1"></i>  Générer mon attestation</span></button>
-            </p>
-
+            <form method="GET" action="." id="form-generation-link" accept-charset="UTF-8"></form>             
             <div class="bg-primary  d-none" id="snackbar">
-                L'attestation est téléchargée sur votre appareil.
-            </div>
+              <a href="./index.html">Link</a>
+          </div>
         </div>
         
         <p class="github">
-            Le code source de ce service est consultable sur <a href="https://github.com/jeremyzaire/attestation-deplacement-derogatoire-q4-2020" class="github-link">GitHub</a>.
+            Le code source de ce service est consultable sur <a href="https://github.com/LAB-MI/attestation-deplacement-derogatoire-q4-2020" class="github-link">GitHub</a>.
         </p>
         <p class="label-mi">
             Ministère de l'Intérieur - DNUM - SDIT
@@ -80,7 +58,6 @@
     <footer role="contentinfo" class="main-footer">
         <div class="footer-links">
             <a href="./confidentialite.html" title="Confidentialité - nouvelle page" target="_blank" class="footer-line footer-link">Confidentialité</a>
-            <a href="./generation.html" title="Génération de lien" class="footer-line footer-link">Génération de lien</a>
             <a href="https://www.interieur.gouv.fr/Infos-du-site/Mentions-legales" title="Mentions légales - nouvelle page" target="_blank" class="footer-line footer-link">Mentions légales</a>
             <a href="https://www.gouvernement.fr/info-coronavirus" title="Information du gouvernement sur le Covid-19 - nouvelle page" target="_blank" class="footer-line footer-link">Informations du gouvernement sur le Covid-19</a>
             <div class="footer-line" >Plus d’infos au <a class="num-08" href="tel:0800130000" title="Numéro vert - appel gratuit depuis un poste fixe en France">0 800 130 000</a></div>
@@ -95,6 +72,6 @@
         </p>
     </div>
 
-    <script src="./js/main.js"></script>
+    <script src="./js/generation.js"></script>
 </body>
 </html>
