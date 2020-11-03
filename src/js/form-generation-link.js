@@ -7,7 +7,7 @@ import formData from '../form-data.json'
 import { $, appendTo, createElement } from './dom-utils'
 
 const createTitleGenerationLink = () => {
-  const h2 = createElement('h2', { className: 'titre-2', innerHTML: 'Générez votre lien permanent : ' })
+  const h2 = createElement('h2', { className: 'titre-2', innerHTML: 'Générez votre lien personnel permanent : ' })
   return [h2]
 }
 // createElement('div', { className: 'form-group' })
